@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creative Performance Audit AI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      background: #070707;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .gradient {
+      background: linear-gradient(135deg,#2563eb,#00c2ff);
+    }
+
+    .glow {
+      box-shadow: 0 0 40px rgba(37,99,235,.35);
+    }
+
+    .fade-in {
+      animation: fade .7s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .loader {
+      border: 4px solid rgba(255,255,255,.1);
+      border-top: 4px solid #3b82f6;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="min-h-screen flex items-center justify-center px-6">
+
+  <div class="max-w-5xl w-full">
+
+    <div class="text-center mb-14 fade-in">
+      <h1 class="text-6xl font-bold mb-5">
+        AI Creative Performance Audit
+      </h1>
+
+      <p class="text-gray-400 text-xl max-w-2xl mx-auto">
+        Discover why your ads and creatives are not converting.
+      </p>
+    </div>
+
+    <!-- FORM -->
+    <div class="glass rounded-3xl p-8 glow">
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <input id="businessName" type="text" placeholder="Business Name"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+        <input id="website" type="text" placeholder="Website URL"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+        <input id="instagram" type="text" placeholder="Instagram URL"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+        <input id="tiktok" type="text" placeholder="TikTok URL"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+        <input id="adspend" type="text" placeholder="Monthly Ad Spend"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+        <input id="objective" type="text" placeholder="Main Objective"
+          class="bg-black/40 border border-white/10 p-4 rounded-xl outline-none">
+
+      </div>
+
+      <textarea id="problem"
+        placeholder="Biggest Problem"
+        class="w-full mt-6 bg-black/40 border border-white/10 p-4 rounded-xl outline-none h-36"></textarea>
+
+      <button onclick="generateAudit()"
+        class="gradient mt-8 w-full py-4 rounded-xl text-lg font-semibold hover:scale-[1.01] transition">
+        Generate Audit
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LOADING -->
+<section id="loadingSection"
+  class="hidden min-h-screen flex flex-col items-center justify-center">
+
+  <div class="loader mb-8"></div>
+
+  <h2 class="text-3xl font-bold mb-3">
+    AI Analyzing Business...
+  </h2>
+
+  <p class="text-gray-400">
+    Generating media buyer insights...
+  </p>
+
+</section>
+
+<!-- REPORT -->
+<section id="reportSection"
+  class="hidden px-6 py-20 max-w-7xl mx-auto fade-in">
+
+  <div class="flex justify-between items-center mb-10">
+    <div>
+      <h2 class="text-5xl font-bold mb-2">
+        Performance Audit
+      </h2>
+
+      <p class="text-gray-400" id="companyTitle"></p>
+    </div>
+
+    <button onclick="window.print()"
+      class="gradient px-6 py-3 rounded-xl font-semibold">
+      Export PDF
+    </button>
+  </div>
+
+  <!-- METRICS -->
+  <div class="grid md:grid-cols-4 gap-6 mb-12">
+
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-gray-400 mb-2">Creative Score</h3>
+      <p class="text-5xl font-bold text-blue-400">72</p>
+    </div>
+
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-gray-400 mb-2">Conversion Score</h3>
+      <p class="text-5xl font-bold text-blue-400">58</p>
+    </div>
+
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-gray-400 mb-2">Ad Potential</h3>
+      <p class="text-5xl font-bold text-blue-400">81</p>
+    </div>
+
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-gray-400 mb-2">Scaling Potential</h3>
+      <p class="text-5xl font-bold text-blue-400">76</p>
+    </div>
+
+  </div>
+
+  <!-- CHART -->
+  <div class="glass rounded-3xl p-8 mb-12">
+    <canvas id="performanceChart"></canvas>
+  </div>
+
+  <!-- ANALYSIS -->
+  <div class="grid lg:grid-cols-2 gap-8">
+
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-3xl font-bold mb-5">
+        Creative Analysis
+      </h3>
+
+      <p class="text-gray-300 leading-8">
+        The business shows weak hook structures in short-form content.
+        Product presentation appears too late in the videos,
+        reducing retention and lowering click-through rates.
+
+        Current creatives lack emotional tension, urgency,
+        and clear value communication.
+
+        UGC implementation appears limited and there is
+        minimal storytelling in paid creatives.
+      </p>
+    </div>
+
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-3xl font-bold mb-5">
+        Media Buyer Analysis
+      </h3>
+
+      <p class="text-gray-300 leading-8">
+        The advertising structure likely suffers from weak
+        creative testing systems and insufficient segmentation
+        between cold, warm, and hot audiences.
+
+        The business may also be experiencing creative fatigue,
+        inefficient retargeting structure, and weak offer positioning.
+
+        Recommended improvements include:
+        <br><br>
+
+        • Faster hooks within first 2 seconds<br>
+        • Aggressive creative testing<br>
+        • UGC implementation<br>
+        • Stronger CTA structure<br>
+        • Landing page optimization<br>
+        • Retargeting sequences<br>
+        • Dynamic offer positioning
+      </p>
+    </div>
+
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-3xl font-bold mb-5">
+        Social Media Analysis
+      </h3>
+
+      <p class="text-gray-300 leading-8">
+        Brand consistency appears moderate.
+        Current content lacks premium positioning
+        and authority-building assets.
+
+        Posting structure should focus more on:
+        <br><br>
+
+        • Product demonstrations<br>
+        • Problem/solution videos<br>
+        • Founder storytelling<br>
+        • Customer proof<br>
+        • Educational hooks
+      </p>
+    </div>
+
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-3xl font-bold mb-5">
+        Action Plan
+      </h3>
+
+      <p class="text-gray-300 leading-8">
+        7-Day Strategy:
+        <br><br>
+
+        • Launch 3 new creatives<br>
+        • Improve hooks<br>
+        • Test UGC ads<br>
+        • Analyze CTR & CPM
+
+        <br><br>
+
+        30-Day Strategy:
+        <br><br>
+
+        • Scale best-performing creatives<br>
+        • Build retargeting system<br>
+        • Increase brand authority<br>
+        • Optimize landing pages<br>
+        • Expand testing framework
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+
+function generateAudit() {
+
+  const businessName =
+    document.getElementById("businessName").value;
+
+  document.querySelector("section").style.display = "none";
+
+  document.getElementById("loadingSection")
+    .classList.remove("hidden");
+
+  setTimeout(() => {
+
+    document.getElementById("loadingSection")
+      .classList.add("hidden");
+
+    document.getElementById("reportSection")
+      .classList.remove("hidden");
+
+    document.getElementById("companyTitle")
+      .innerText = businessName;
+
+    generateChart();
+
+  }, 3000);
+
+}
+
+function generateChart() {
+
+  const ctx =
+    document.getElementById('performanceChart');
+
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: [
+        'Creative',
+        'CTR',
+        'Retention',
+        'Brand',
+        'Scaling',
+        'Conversion'
+      ],
+
+      datasets: [{
+        label: 'Performance',
+        data: [72,58,69,80,76,61],
+      }]
+    },
+
+    options: {
+      scales: {
+        r: {
+          angleLines: {
+            color: 'rgba(255,255,255,.1)'
+          },
+
+          grid: {
+            color: 'rgba(255,255,255,.1)'
+          },
+
+          pointLabels: {
+            color: 'white'
+          },
+
+          ticks: {
+            display: false
+          }
+        }
+      },
+
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white'
+          }
+        }
+      }
+    }
+  });
+
+}
+
+</script>
+
+</body>
+</html>
