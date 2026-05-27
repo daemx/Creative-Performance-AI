@@ -136,24 +136,459 @@
 </section>
 
 <!-- REPORT -->
+<!-- ========================= -->
+<!-- PREMIUM AUDIT SECTIONS -->
+<!-- REPLACE YOUR OLD REPORT SECTION WITH THIS -->
+<!-- ========================= -->
+
 <section id="reportSection"
-  class="hidden px-6 py-20 max-w-7xl mx-auto fade-in">
+class="hidden px-6 py-20 max-w-7xl mx-auto fade-in">
 
-  <div class="flex justify-between items-center mb-10">
-    <div>
-      <h2 class="text-5xl font-bold mb-2">
-        Performance Audit
-      </h2>
+<!-- HEADER -->
 
-      <p class="text-gray-400" id="companyTitle"></p>
-    </div>
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-14 gap-6">
 
-    <button onclick="window.print()"
-      class="gradient px-6 py-3 rounded-xl font-semibold">
-      Export PDF
-    </button>
-  </div>
+<div>
+<h2 class="text-6xl font-black mb-3">
+AI Business Audit
+</h2>
 
+<p class="text-gray-400 text-xl" id="companyTitle"></p>
+</div>
+
+<div class="flex gap-4">
+
+<button onclick="window.print()"
+class="gradient px-7 py-4 rounded-2xl font-bold">
+Export PDF
+</button>
+
+<button
+class="bg-white/10 px-7 py-4 rounded-2xl font-bold border border-white/10">
+Share Report
+</button>
+
+</div>
+
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+
+<div class="glass rounded-3xl p-10 mb-12 relative overflow-hidden">
+
+<div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 blur-3xl"></div>
+
+<h3 class="text-4xl font-bold mb-8">
+Executive Summary
+</h3>
+
+<div class="grid lg:grid-cols-2 gap-10">
+
+<div>
+
+<p class="text-gray-300 leading-9 text-lg">
+The business shows strong market potential but suffers from weak
+creative structure, low emotional retention, inconsistent
+brand authority, and insufficient advertising psychology.
+
+Current creatives appear visually acceptable but lack:
+</p>
+
+<div class="mt-8 space-y-4">
+
+<div class="flex items-center gap-4">
+<div class="w-4 h-4 rounded-full bg-red-500"></div>
+<p>Fast emotional hooks</p>
+</div>
+
+<div class="flex items-center gap-4">
+<div class="w-4 h-4 rounded-full bg-red-500"></div>
+<p>Strong conversion-focused storytelling</p>
+</div>
+
+<div class="flex items-center gap-4">
+<div class="w-4 h-4 rounded-full bg-red-500"></div>
+<p>Audience retention optimization</p>
+</div>
+
+<div class="flex items-center gap-4">
+<div class="w-4 h-4 rounded-full bg-red-500"></div>
+<p>UGC trust-building structures</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="glass rounded-3xl p-8 border border-blue-500/20">
+
+<h4 class="text-2xl font-bold mb-6">
+Projected Growth Opportunity
+</h4>
+
+<div class="space-y-6">
+
+<div>
+<p class="text-gray-400 mb-2">CTR Improvement</p>
+<div class="w-full bg-white/10 rounded-full h-4">
+<div class="bg-blue-500 h-4 rounded-full w-[78%]"></div>
+</div>
+</div>
+
+<div>
+<p class="text-gray-400 mb-2">ROAS Potential</p>
+<div class="w-full bg-white/10 rounded-full h-4">
+<div class="bg-blue-500 h-4 rounded-full w-[85%]"></div>
+</div>
+</div>
+
+<div>
+<p class="text-gray-400 mb-2">Creative Optimization</p>
+<div class="w-full bg-white/10 rounded-full h-4">
+<div class="bg-blue-500 h-4 rounded-full w-[92%]"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PERFORMANCE CARDS -->
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+<div class="glass rounded-3xl p-8 relative overflow-hidden">
+
+<div class="absolute right-0 top-0 w-32 h-32 bg-blue-500/10 blur-3xl"></div>
+
+<p class="text-gray-400 mb-3">Creative Score</p>
+
+<h3 class="text-6xl font-black text-blue-400 mb-3">
+72
+</h3>
+
+<p class="text-green-400">
++18% potential
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-3">Brand Authority</p>
+
+<h3 class="text-6xl font-black text-blue-400 mb-3">
+61
+</h3>
+
+<p class="text-yellow-400">
+Needs optimization
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-3">Ad Performance</p>
+
+<h3 class="text-6xl font-black text-blue-400 mb-3">
+78
+</h3>
+
+<p class="text-green-400">
+High scaling capacity
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-3">Conversion Rate</p>
+
+<h3 class="text-6xl font-black text-blue-400 mb-3">
+54
+</h3>
+
+<p class="text-red-400">
+Weak funnel structure
+</p>
+
+</div>
+
+</div>
+
+<!-- MAIN CHART -->
+
+<div class="glass rounded-3xl p-10 mb-12">
+
+<div class="flex justify-between items-center mb-10">
+
+<div>
+<h3 class="text-4xl font-bold mb-2">
+Business Performance Metrics
+</h3>
+
+<p class="text-gray-400">
+Current estimated advertising performance
+</p>
+</div>
+
+</div>
+
+<canvas id="performanceChart"></canvas>
+
+</div>
+
+<!-- PROBLEMS & SOLUTIONS -->
+
+<div class="grid lg:grid-cols-2 gap-8 mb-12">
+
+<!-- PROBLEMS -->
+
+<div class="glass rounded-3xl p-10 border border-red-500/10">
+
+<h3 class="text-4xl font-bold mb-8">
+Detected Problems
+</h3>
+
+<div class="space-y-8">
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+Weak Hooks
+</h4>
+
+<p class="text-gray-400 leading-7">
+The product appears too late in videos, causing
+low retention during the first 3 seconds.
+</p>
+</div>
+
+</div>
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+Creative Fatigue
+</h4>
+
+<p class="text-gray-400 leading-7">
+The same visual structures are repeated constantly,
+reducing audience response over time.
+</p>
+</div>
+
+</div>
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+Low Authority
+</h4>
+
+<p class="text-gray-400 leading-7">
+The brand lacks trust-building assets and emotional
+storytelling content.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SOLUTIONS -->
+
+<div class="glass rounded-3xl p-10 border border-blue-500/20">
+
+<h3 class="text-4xl font-bold mb-8">
+Recommended Solutions
+</h3>
+
+<div class="space-y-8">
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+UGC Strategy
+</h4>
+
+<p class="text-gray-400 leading-7">
+Implement user-generated style creatives focused on
+trust, fast pacing, and emotional storytelling.
+</p>
+</div>
+
+</div>
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+Creative Testing
+</h4>
+
+<p class="text-gray-400 leading-7">
+Launch 5–10 hook variations weekly to identify
+high-retention creatives.
+</p>
+</div>
+
+</div>
+
+<div class="flex gap-5">
+
+<img
+src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1200"
+class="w-28 h-28 rounded-2xl object-cover">
+
+<div>
+<h4 class="text-2xl font-bold mb-2">
+Offer Optimization
+</h4>
+
+<p class="text-gray-400 leading-7">
+Improve perceived value using bundles,
+urgency, and stronger call-to-actions.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TIMELINE -->
+
+<div class="glass rounded-3xl p-10 mb-12">
+
+<h3 class="text-4xl font-bold mb-10">
+Estimated Improvement Timeline
+</h3>
+
+<div class="grid lg:grid-cols-3 gap-8">
+
+<div class="border border-white/10 rounded-3xl p-8">
+
+<p class="text-blue-400 text-sm mb-4">
+FIRST 7 DAYS
+</p>
+
+<h4 class="text-3xl font-bold mb-5">
+Initial Optimization
+</h4>
+
+<p class="text-gray-400 leading-8">
+• Hook restructuring<br>
+• New ad variations<br>
+• UGC implementation<br>
+• Creative refresh
+</p>
+
+</div>
+
+<div class="border border-white/10 rounded-3xl p-8">
+
+<p class="text-blue-400 text-sm mb-4">
+30 DAYS
+</p>
+
+<h4 class="text-3xl font-bold mb-5">
+Performance Growth
+</h4>
+
+<p class="text-gray-400 leading-8">
+• CTR improvements<br>
+• Better audience retention<br>
+• Higher engagement<br>
+• Lower CPM
+</p>
+
+</div>
+
+<div class="border border-white/10 rounded-3xl p-8">
+
+<p class="text-blue-400 text-sm mb-4">
+60-90 DAYS
+</p>
+
+<h4 class="text-3xl font-bold mb-5">
+Scaling Stage
+</h4>
+
+<p class="text-gray-400 leading-8">
+• Aggressive scaling<br>
+• ROAS optimization<br>
+• Brand authority growth<br>
+• Stronger conversions
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- REFERENCES -->
+
+<div class="glass rounded-3xl p-10">
+
+<h3 class="text-4xl font-bold mb-10">
+Recommended Creative References
+</h3>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<img
+src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200"
+class="rounded-3xl h-80 w-full object-cover">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+class="rounded-3xl h-80 w-full object-cover">
+
+<img
+src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200"
+class="rounded-3xl h-80 w-full object-cover">
+
+</div>
+
+</div>
+
+</section>
   <!-- METRICS -->
   <div class="grid md:grid-cols-4 gap-6 mb-12">
 
